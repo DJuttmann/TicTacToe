@@ -47,6 +47,7 @@ namespace TicTacToe
     int GameType;
     int PlayerTypes;
     private int SelectedMarker;
+    private bool AwaitingComputerMove = false;
 
     
     // Constructor.
@@ -54,10 +55,17 @@ namespace TicTacToe
     {
       InitializeComponent ();
       Game = new TicTacToeGame ();
-      ImageX = Image.FromFile ("MarkerX.png");
-      ImageO = Image.FromFile ("MarkerO.png");
-      ImageXFaded = Image.FromFile ("MarkerXFaded.png");
-      ImageOFaded = Image.FromFile ("MarkerOFaded.png");
+      try
+      {
+        ImageX = Image.FromFile ("MarkerX.png");
+        ImageO = Image.FromFile ("MarkerO.png");
+        ImageXFaded = Image.FromFile ("MarkerXFaded.png");
+        ImageOFaded = Image.FromFile ("MarkerOFaded.png");
+      }
+      catch (Exception ex)
+      {
+        throw ex;
+      }
       foreach (string str in GameTypeNames)
         listBoxGameType.Items.Add (str);
       listBoxGameType.SelectedIndex = 0;
@@ -84,6 +92,7 @@ namespace TicTacToe
     // Start a new game.
     private void NewGame ()
     {
+      AwaitingComputerMove = false; // cancel any expected computer moves
       switch (PlayerTypes)
       {
       default:
@@ -124,7 +133,10 @@ namespace TicTacToe
         break;
       }
       if (Player1 == PlayerType.computer)
+      {
+        AwaitingComputerMove = true; // set flag that you are expecting a computer move
         MakeComputerMove ();
+      }
       else
       {
         RenderBoard ();
@@ -246,13 +258,21 @@ namespace TicTacToe
 
 
     // Try to make a move by placing SelectedMarker at (row, col).
-    private void MakeMove (int row, int col)
+    private async void MakeMove (int row, int col)
     {
+      if (AwaitingComputerMove)
+        return;
       if (Game.MakeMove (row, col, SelectedMarker))
       {
         if ((Game.ActivePlayer == Player.Player1 && Player1 == PlayerType.computer) ||
             (Game.ActivePlayer == Player.Player2 && Player2 == PlayerType.computer))
+        {
+          RenderBoard ();
+          UpdateGameStatus ();
+          AwaitingComputerMove = true; // prevent making moves while waiting
+          await Task.Delay (500);
           MakeComputerMove ();
+        }
         RenderBoard ();
         UpdateGameStatus ();
       }
@@ -262,6 +282,8 @@ namespace TicTacToe
     // Let the computer make a move for the current player.
     private void MakeComputerMove ()
     {
+      if (!AwaitingComputerMove)
+        return; // Cancel computer move if not expecting one.
       UpdateGameStatus ();
       if (Game.Status != Status.Unresolved)
       {
@@ -272,6 +294,7 @@ namespace TicTacToe
         return;
       RenderBoard ();
       UpdateGameStatus ();
+      AwaitingComputerMove = false;
     }
     
 

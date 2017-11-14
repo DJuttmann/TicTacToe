@@ -258,8 +258,6 @@ namespace TicTacToe
     {
       if (ValidMarkers.Contains (marker) && Status == Status.Unresolved)
         return gameBoard.MakeMove (row, col, marker);
-      if (!ValidMarkers.Contains (marker))
-        MessageBox.Show ("Invalid marker!");
       return false;
     }
 
@@ -446,7 +444,14 @@ namespace TicTacToe
     {
       Application.EnableVisualStyles ();
       Application.SetCompatibleTextRenderingDefault (false);
-      Application.Run (new MainForm ());
+      try
+      {
+        Application.Run (new MainForm ());
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show ("Could not find resources:\n" + ex.Message);
+      }
     }
   }
 }
