@@ -177,7 +177,7 @@
       // 
       // buttonNewGame
       // 
-      this.buttonNewGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.buttonNewGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.buttonNewGame.Location = new System.Drawing.Point(187, 71);
       this.buttonNewGame.Name = "buttonNewGame";
       this.buttonNewGame.Size = new System.Drawing.Size(121, 28);
@@ -189,10 +189,11 @@
       // labelStatus
       // 
       this.labelStatus.AutoSize = true;
+      this.labelStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.labelStatus.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-      this.labelStatus.Location = new System.Drawing.Point(80, 480);
+      this.labelStatus.Location = new System.Drawing.Point(78, 480);
       this.labelStatus.Name = "labelStatus";
-      this.labelStatus.Size = new System.Drawing.Size(64, 17);
+      this.labelStatus.Size = new System.Drawing.Size(77, 20);
       this.labelStatus.TabIndex = 10;
       this.labelStatus.Text = "<Status>";
       // 
@@ -321,7 +322,7 @@
       // 
       // buttonSelectGame
       // 
-      this.buttonSelectGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.buttonSelectGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.buttonSelectGame.Location = new System.Drawing.Point(187, 28);
       this.buttonSelectGame.Name = "buttonSelectGame";
       this.buttonSelectGame.Size = new System.Drawing.Size(121, 28);
@@ -350,6 +351,7 @@
       this.Controls.Add(this.pictureBox_1_1);
       this.Controls.Add(this.pictureBox_0_1);
       this.Controls.Add(this.pictureBox_0_0);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.Name = "MainForm";
       this.Text = "Tic Tac Toe";
       ((System.ComponentModel.ISupportInitialize)(this.pictureBox_0_0)).EndInit();

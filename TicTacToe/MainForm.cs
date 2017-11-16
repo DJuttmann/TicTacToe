@@ -148,7 +148,7 @@ namespace TicTacToe
     // Display game mode, game status, active player.
     public void UpdateGameStatus ()
     {
-      string s = "Game mode: " + GameTypeNames [GameType] + "\n";
+      string s = "Mode: " + GameTypeNames [GameType] + "\n";
       switch (Game.Status)
       {
       case Status.Unresolved:
